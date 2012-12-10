@@ -1,0 +1,155 @@
+/* CSS Base File 
+*/
+
+/*layout*/
+#header {
+	background: url('../img/titolo.png') no-repeat center black;
+	width:600px;
+	height:250px;
+	margin: 0 auto;
+	text-align: center;
+}
+#header h1 {
+	font-size:50px;
+	margin:0;
+}
+#container {
+	margin-bottom: 100px;
+}
+#footer {
+	bottom:0px;
+	position:fixed;
+	text-align:center;
+	background: black;
+	width: 100%;
+}
+#locale {
+	top:0px;
+	right:0px;
+	position:absolute;
+}
+#nav li {
+	display:inline;
+	padding: 3px;
+}
+#nav li:hover{
+	border: solid 1px HOVER;
+	padding:2px;
+}
+#nav {
+	text-align:center;
+}
+#nav a{
+	text-decoration:none;
+	font-weight: bold;
+}
+
+#loader{
+	background:url('../img/loading.gif') center no-repeat fixed;
+	position: fixed;
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+#loader DIV{
+	width: 100%;
+	height: 100%;
+	filter:alpha(opacity=70);
+	opacity:.70;
+ 	-moz-opacity:.70;
+	background: black center no-repeat fixed;
+}
+
+/*tag*/
+body {
+	background-image: url('../img/background.jpg'); background-repeat: repeat;
+	color: white;
+}
+
+/*link decoration */
+A:link 	{text-decoration: underline; color: NORMAL} 
+A:visited {text-decoration: underline; color: NORMAL} 
+A:hover { text-decoration: none; color:  HOVER}
+
+/*tolgo il bordo dalle immagini*/
+img
+	{
+	border: 0px;
+	}
+/*allineo il testo nelle tabelle*/
+td {
+    text-align: center;
+}
+
+abbr {
+	cursor: help;
+	border-bottom: 1px dashed #999;
+}
+
+input {
+	color: INPUT_TEXT;
+	background:INPUT_BG;
+	border: NORMAL solid 1px;
+	padding: 2px;
+}
+input:hover,textarea:hover{
+	border: HOVER solid 2px;
+	padding: 1px;
+}
+input:focus,textarea:focus{
+	border: HOVER solid 2px;
+	padding: 1px;
+}
+select {color: INPUT_TEXT;}
+optgroup {color: INPUT_TEXT;}
+textarea {
+	color: INPUT_TEXT;
+	background:INPUT_BG;
+	border: #3eaeee solid 1px;
+	padding: 2px;
+}
+option {color:INPUT_TEXT;}
+
+
+/*log*/
+
+#log ol{
+	background-color: gray;
+}
+
+#log li {
+	border: 1px solid white;
+	color:black;
+}
+/*emerg*/
+#log li.priority1 {
+	background-color:red;
+}
+/*crit*/
+#log li.priority2 {
+	background-color:red;
+}
+/*err*/
+#log li.priority3 {
+	background-color:red;
+}
+/*warn*/
+#log li.priority4 {
+	background-color:orange;
+}
+/*notice*/
+#log li.priority5 {
+	background-color:yellow;
+}
+/*info*/
+#log li.priority6 {
+	background-color:blue;
+}
+/*debug*/
+#log li.priority7 {
+	background-color:white;
+}
+
+

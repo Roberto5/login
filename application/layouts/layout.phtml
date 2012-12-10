@@ -1,0 +1,89 @@
+<?php 
+//init
+$auth=Zend_Auth::getInstance();
+$ua=new Zend_Http_UserAgent();
+$config = Zend_Registry::get('config');
+
+?>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<meta name="DESCRIPTION" content="<?php echo $this->t->_('DESCRIPTION');?>" />
+	<meta name="KEYWORDS" content="" />
+	<link rel="shortcut icon" href="<?php echo $this->baseUrl(); ?>/favicon.ico" />
+<?php
+$mobile=false;
+if ($config->mobile) {
+	try {
+		$device=$ua->getDevice();
+		$mobile=$device->getFeature('is_mobile');
+	} catch (Zend_Http_UserAgent_Exception $e) {
+		$mobile=true;
+	}
+}
+echo $this->headLink()->prependStylesheet($this->baseUrl() . '/common/css/css.php'.($mobile? '?l=m' : ''));
+echo $this->headScript()->prependFile($this->baseUrl('/common/js/js.php'));
+echo '<script tipe="text/javascript">
+<!--
+var path="'.$this->baseUrl().'";
+//-->
+</script>';
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle(SITE);
+echo $this->headTitle();
+?>
+	</head>
+	<body>
+		<div id="loader" style="display: none;">
+			<div></div>
+		</div>
+		<div id="header">
+			<h1>SITE</h1>
+		</div>
+		<div id="locale">
+			language
+			<form action="<?php echo $this->url();?>">
+			<?php 
+			$list=array_merge(array('browser'=>'auto'),$this->t->getList());
+			echo $this->formSelect('locale',$_COOKIE['locale'],array('onchange'=>'submit();','id'=>'loc'),$list);
+			?>
+			</form>
+		</div>
+		<div id="container">
+		<?php 
+		if ($this->logger) {
+			$text="<ol>";
+			foreach ($this->logger as $value) {
+				$text.='<li class="priority'.$value['priority'].'"><b>'.$value['info'].'</b> : '.$value['timestamp'].' - '.$value['message'].' - '.$value['priorityName']."</li>";
+			}
+			$text.="</ol>";
+			echo $this->template()->spoiler($text,false,'log');
+		}
+		?>
+		<ul id="nav">
+			<li><a
+				href="<?php echo $this->url(array('controller'=>"index",'action'=>'index'));?>">Home</a>
+			</li>
+			<?php 
+			//user
+			if ($auth->hasIdentity()) {
+				echo '
+				<li><a href="'.$this->url(array('controller'=>"login",'action'=>'logout')).'">Logout</a></li>
+				';
+			}
+			else {
+				echo '
+				<li><a href="'.$this->url(array('controller'=>"login",'action'=>'index')).'">Login</a></li>
+				<li><a href="'.$this->url(array('controller'=>"reg",'action'=>'index')).'">'.$this->t->_('REG').'</a></li>';
+			}
+			?>
+		</ul>
+		<?php 
+			echo $this->layout()->content; ?>
+	</div>
+	<div id="footer">
+		footer
+	</div>
+</body>
+</html>
