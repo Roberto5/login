@@ -60,27 +60,50 @@ echo $this->headTitle();
 			$text.="</ol>";
 			echo $this->template()->spoiler($text,false,'log');
 		}
-		?>
-		<ul id="nav">
-			<li><a
-				href="<?php echo $this->url(array('controller'=>"index",'action'=>'index'));?>">Home</a>
-			</li>
-			<?php 
-			//user
-			if ($auth->hasIdentity()) {
-				echo '
-				<li><a href="'.$this->url(array('controller'=>"login",'action'=>'logout')).'">Logout</a></li>
-				';
-			}
-			else {
-				echo '
-				<li><a href="'.$this->url(array('controller'=>"login",'action'=>'index')).'">Login</a></li>
-				<li><a href="'.$this->url(array('controller'=>"reg",'action'=>'index')).'">'.$this->t->_('REG').'</a></li>';
-			}
-			?>
-		</ul>
-		<?php 
-			echo $this->layout()->content; ?>
+		$page=array(
+			array('label'=>'Home'
+				,'module'=>'default'
+				,'controller' => 'index'
+				,'action'=>'index'
+				,'order'=>0
+			)
+			,array('label'=>'Login'
+				,'module'=>'default'
+				,'controller' => 'login'
+				,'action'=>'index'
+				,'order'=>1
+				,'resource'=>'login'
+				,'privilege'=>'index'
+			)
+			,array('label'=>'Logout'
+				,'module'=>'default'
+				,'controller' => 'login'
+				,'action'=>'logout'
+				,'order'=>2
+				,'resource'=>'login'
+				,'privilege'=>'logout'
+			)
+			,array('label'=>'[REG]'
+				,'module'=>'default'
+				,'controller' => 'reg'
+				,'action'=>'index'
+				,'order'=>3
+				,'resource'=>'reg'
+				,'privilege'=>'index'
+			)
+			,array('label'=>'Credits'
+				,'module'=>'default'
+				,'controller' => 'index'
+				,'action'=>'credits'
+				,'order'=>100
+			)
+		);
+		$menu=new Zend_Navigation($page);
+		$acl = Zend_Registry::get("acl");
+		
+		$this->navigation($menu)->setAcl($acl)->setRole(Model_Role::getRole());
+		echo $this->navigation();//->menu();
+		echo $this->layout()->content; ?>
 	</div>
 	<div id="footer">
 		footer
