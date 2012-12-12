@@ -70,9 +70,13 @@ $css=array(
 
 $key=array('NORMAL'=>'#e6e6e6',
 		'HOVER'=>'#dadada',
-		'ACTIVE'=>'#fff',
+		'ACTIVE'=>'#eee',
 		'INPUT_TEXT'=>'#000',
-		'INPUT_BG'=>'#fff'
+		'INPUT_BG'=>'#fff',
+		'BACKGROUND2'=>'#aaa',
+		'BACKGROUND'=>'#eee',
+		'COLOR'=>'#000',
+		'BORDER'=>'#001'
 		);
 $r = dump_css_cache($layout,$key);
 $display = $r['text'];
