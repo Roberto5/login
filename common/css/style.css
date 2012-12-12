@@ -112,7 +112,29 @@ textarea {
 	padding: 2px;
 }
 option {color:INPUT_TEXT;}
+/*reg form*/
 
+#registration_form {
+	width:350px;
+	margin: 0 auto;
+}
+#registration_form dt {
+	float:left;
+	width: 150px;
+	padding: 4px;
+	
+}
+#registration_form dd {
+	text-align: right;
+	margin: 4px 0;
+	width: 300px;
+	border: 1px solid;
+	padding: 3px;
+	border-radius: 5px;
+}
+#submit-element {
+	border:0 !important;
+}
 
 /*log*/
 

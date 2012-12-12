@@ -17,8 +17,11 @@ $file=array(
 		"jquery.cookie.js",
 		// scroller
 		"jquery.li-scroller.1.0.js",
+		//form validate
+		'jquery.validate.min.js',
 		'*main script*',
-		"main.js");
+		"main.js"
+		,'reg.js');
 
 $text="";$mtime=0;
 foreach ($file as $value) {
