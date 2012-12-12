@@ -23,11 +23,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `tr_params`
+-- Struttura della tabella `params`
 --
 
-DROP TABLE IF EXISTS `tr_params`;
-CREATE TABLE `tr_params` (
+DROP TABLE IF EXISTS `params`;
+CREATE TABLE `params` (
   `name` varchar(20) COLLATE utf8_bin NOT NULL,
   `value` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`name`)
@@ -36,11 +36,11 @@ CREATE TABLE `tr_params` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `tr_role`
+-- Struttura della tabella `role`
 --
 
-DROP TABLE IF EXISTS `tr_role`;
-CREATE TABLE `tr_role` (
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
   `uid` int(6) unsigned NOT NULL,
   `role` varchar(30) COLLATE utf8_bin NOT NULL DEFAULT 'user',
   PRIMARY KEY (`uid`)
@@ -49,11 +49,11 @@ CREATE TABLE `tr_role` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `tr_user`
+-- Struttura della tabella `user`
 --
 
-DROP TABLE IF EXISTS `tr_user`;
-CREATE TABLE `tr_user` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
   `username` varchar(40) COLLATE utf8_bin NOT NULL,
   `password` varchar(128) COLLATE utf8_bin NOT NULL,
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
@@ -71,11 +71,11 @@ CREATE TABLE `tr_user` (
 --
 
 --
--- Limiti per la tabella `tr_role`
+-- Limiti per la tabella `role`
 --
-ALTER TABLE `tr_role`
-  ADD CONSTRAINT `tr_role_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `tr_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tr_role_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `tr_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `role`
+  ADD CONSTRAINT `role_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `role_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
