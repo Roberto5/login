@@ -32,7 +32,7 @@ class RegController extends Zend_Controller_Action
 					$locale=$this->_t->getLocale();
 					$sender = new Zend_Mail();
 					$sender->addTo($post['email'])
-					->setFrom(WEBMAIL, SITO)
+					->setFrom($conf->webmail, $conf->site)
 					->setBodyHtml(
 							str_replace('{link}', $conf->url.$this->view->baseUrl('reg/active/code/'.$code),
 									str_replace('{user}', $post['username'], $message[$locale]['html'])))
@@ -107,7 +107,7 @@ class RegController extends Zend_Controller_Action
 					if ($conf->email->active) {
 						$sender = new Zend_Mail();
 						$sender->addTo($_POST['email'])
-						->setFrom(WEBMAIL, SITO)
+						->setFrom($conf->webmail, $conf->site)
 						->setBodyHtml(
 								str_replace('{link}', $conf->url.$this->view->baseUrl('reg/active/code/'.$code),
 										str_replace('{user}', $user->data['username'], $message[$locale]['reg']['html'])))

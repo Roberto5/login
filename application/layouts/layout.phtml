@@ -31,7 +31,7 @@ var path="'.$this->baseUrl().'";
 //-->
 </script>';
 $this->headTitle()->setSeparator(' - ');
-$this->headTitle(SITE);
+$this->headTitle($config->site);
 echo $this->headTitle();
 ?>
 	</head>
@@ -40,7 +40,7 @@ echo $this->headTitle();
 			<div></div>
 		</div>
 		<div id="header">
-			<h1>SITE</h1>
+			<h1><?php echo $config->site;?></h1>
 		</div>
 		<div id="locale">
 			language
