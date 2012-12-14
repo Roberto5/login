@@ -21,7 +21,8 @@ $file=array(
 		'jquery.validate.min.js',
 		'*main script*',
 		"main.js"
-		,'reg.js');
+		,'reg.js'
+		,'profile.js');
 
 $text="";$mtime=0;
 foreach ($file as $value) {

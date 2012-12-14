@@ -50,8 +50,7 @@ class RegController extends Zend_Controller_Action
 	}
 
 	public function ctrlAction()
-	{
-			
+	{	
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 		header("Content-type: application/json");

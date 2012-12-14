@@ -17,6 +17,8 @@ $acl->addResource('admin');
 $acl->addResource("log");
 $acl->addResource('login','default');
 $acl->addResource('reg','default');
+$acl->addResource('profile','default');
+
 
 //altro
 $acl->addResource("debug");
@@ -26,16 +28,15 @@ $acl->addResource("debug");
 $acl->allow("guest","default");
 $acl->deny("guest","debug");
 $acl->deny("guest","log");
-//$acl->allow('guest','login');
 $acl->deny('guest','login','logout');
-
+$acl->deny('guest','profile');
 
 //permessi user
 
 $acl->allow('user','default');
 $acl->deny('user','login','index');
 $acl->deny('user','reg','index');
-//$acl->allow('user','login','logout');
+$acl->allow('user','profile');
 
 //permessi staff
 //@todo definire permessi staff

@@ -1,0 +1,32 @@
+<form class="profile">
+<table>
+  <tr id="username">
+    <td>[USERNAME]</td>
+    <td><span>NICK</span><input name="username" style="display:none;" required="required" value="NICK" /></td>
+<?php 
+if ($this->can) {
+?>
+    <td><button class="edit">[EDIT]</button></td>
+<?php 
+}
+?>
+  </tr>
+  <tr id="email">
+    <td>Email :</td>
+    <td><span>EMAIL</span><input name="email" type="email" required="required" style="display:none;" value="EMAIL" /></td>
+    <td><button class="edit">[EDIT]</button></td>
+  </tr>
+<?php 
+foreach ($this->option as $key => $value) {
+	echo '<tr id="'.$key.'">
+		<td>'.$value['name'].'</td>
+		<td><span>'.$value['value'].'</span><input '.($value['required']?'required="required"':'').' name="'.$key.'" style="display:none;" value="'.$value['value'].'" /></td>
+		<td><button class="edit">[EDIT]</button></td>
+	</tr>';
+}
+?>
+  <tr>
+    <td class="button" colspan="3"><button>[CHANGEPASS]</button> <button>[DELETE] account</button></td>
+  </tr>
+</table>
+</form>
