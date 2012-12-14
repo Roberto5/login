@@ -1,4 +1,8 @@
 $(function(){
+	//support of details tag
+	$('html').addClass($.fn.details.support ? 'details' : 'no-details');
+	$('.no-details details').details();
+	//**************
 	$("ul#news").liScroll();
 	$("button:not(.edit):not(.add):not(.delete),input[type=submit]:not(.edit):not(.add):not(.delete)").button();
 	$("button.edit").button({icons: {
@@ -58,6 +62,7 @@ function request(url,data,callback,reload) {
 		},
 		'data':data,
 		error:function(r,s,e ) {
+			loader.hide();
 			alert(e+' on call:'+this.url+' whit data '+this.data);
 		}
 	});

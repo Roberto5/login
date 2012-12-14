@@ -19,6 +19,7 @@ $file=array(
 		"jquery.li-scroller.1.0.js",
 		//form validate
 		'jquery.validate.min.js',
+		'jquery.details.min.js',
 		'*main script*',
 		"main.js"
 		,'reg.js'
