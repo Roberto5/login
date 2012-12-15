@@ -4,9 +4,14 @@ $(function(){
 	$('.no-details details').details();
 	//**************
 	$("ul#news").liScroll();
-	$("button:not(.edit):not(.add):not(.delete),input[type=submit]:not(.edit):not(.add):not(.delete)").button();
+	$("button:not(.close):not(.edit):not(.add):not(.delete),input[type=submit]:not(.edit):not(.add):not(.delete)").button();
 	$("button.edit").button({icons: {
         primary: "ui-icon-wrench"
+    },
+    text: false
+    });
+	$("button.close").button({icons: {
+        primary: "ui-icon-circle-close"
     },
     text: false
     });
@@ -67,8 +72,6 @@ function request(url,data,callback,reload) {
 		}
 	});
 }
-
 jQuery.validator.addMethod('regExpr',function(value,element,param){
 	return this.optional(element) || param.test(value);
 },jQuery.validator.format("don't match the expression {0}"));
-
