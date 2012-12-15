@@ -36,6 +36,16 @@ echo $this->headTitle();
 ?>
 	</head>
 	<body>
+<?php 
+//setcookie('closeadlang','false',time()-604800,'/');$_COOKIE['closeadlang']=true;
+
+if (!in_array($this->t->getLocale(), $this->t->getList()) || (Zend_Registry::get('langnotsup'))&&!$_COOKIE['closeadlang']) {
+	//setcookie('closeadlang','false',time()+604800,'/');$_COOKIE['closeadlang']=true;
+	?>
+	<div class="ui-state-error"><button class="close" onClick="$.cookie('closeadlang','true',{expires:7,path:'/'});$(this).parent().hide();">[CLOSE]</button> [LANGUAGE] <a href="https://github.com/pagliaccio/login">https://github.com/pagliaccio/login</a></div>
+	<?php 
+}
+?>
 		<div id="loader" style="display: none;">
 			<div></div>
 		</div>

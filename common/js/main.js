@@ -4,9 +4,14 @@ $(function(){
 	$('.no-details details').details();
 	//**************
 	$("ul#news").liScroll();
-	$("button:not(.edit):not(.add):not(.delete),input[type=submit]:not(.edit):not(.add):not(.delete)").button();
+	$("button:not(.close):not(.edit):not(.add):not(.delete),input[type=submit]:not(.edit):not(.add):not(.delete)").button();
 	$("button.edit").button({icons: {
         primary: "ui-icon-wrench"
+    },
+    text: false
+    });
+	$("button.close").button({icons: {
+        primary: "ui-icon-circle-close"
     },
     text: false
     });
