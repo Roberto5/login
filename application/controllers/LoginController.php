@@ -118,7 +118,7 @@ class LoginController extends Zend_Controller_Action
 					$locale=$this->_t->getLocale();
 					$sender = new Zend_Mail();
 					$sender->addTo($user->data['email'])
-					->setFrom($conf->webmail, $conf->site)
+					->setFrom($conf->webmail,$conf->site)
 					->setBodyHtml(
 							str_replace(array('{pass}','{user}'), array($pass,$user->data['username']),
 									$message[$locale]['pass']['html']))

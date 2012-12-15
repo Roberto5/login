@@ -72,8 +72,6 @@ function request(url,data,callback,reload) {
 		}
 	});
 }
-
 jQuery.validator.addMethod('regExpr',function(value,element,param){
 	return this.optional(element) || param.test(value);
 },jQuery.validator.format("don't match the expression {0}"));
-

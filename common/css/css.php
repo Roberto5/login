@@ -85,8 +85,7 @@ foreach ($css as $value) {
 	$r = dump_css_cache($value,$key);
 	$display .= $r['text'];
 	if ($mtime < $r['mtime']) $mtime = $r['mtime'];
-}    
-//$display.=file_get_contents('jquery-ui-1.8.11.custom.css');
+}
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $mtime) . ' GMT');
 echo $display;
 ?>
