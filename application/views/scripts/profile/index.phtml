@@ -22,10 +22,18 @@ if ($this->can) {
   </tr>
 <?php 
 foreach ($this->option as $key => $value) {
+	if (!$value['label']) $value['label']=$value['value'];
 	echo '<tr id="'.$key.'">
 		<td>'.$value['name'].'</td>
-		<td><span>'.$value['value'].'</span><input '.($value['required']?'required="required"':'').' name="'.$key.'" style="display:none;" value="'.$value['value'].'" /></td>
-		<td><button class="edit">[EDIT]</button></td>
+		<td><span>'.$value['label'].'</span>';
+	if (!$value['type']) $value['type']='Text';
+	$value['attr']['style']='display:none;';
+	if ($value['required']) $value['attr']['required']='required';
+	$helper='form'.$value['type'];
+	echo $this->$helper($key,$value['value'],$value['attr'],$value['option']);
+	//$h=new Zend_View_Helper_FormSelect();$h->formSelect($name);
+	//		<input '.(?'required="required"':'').' name="'.$key.'" style="display:none;" value="'.$value['value'].'" /></td>
+	echo'<td><button class="edit">[EDIT]</button></td>
 	</tr>';
 }
 ?>

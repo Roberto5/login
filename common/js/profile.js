@@ -74,7 +74,7 @@ $(function(){
 });
 var profile={
 	edit:function(row) {
-		row.find('input').show();
+		row.find('input,select,textarea').show();
 		row.find('span:eq(0)').hide();
 		button=row.find('button');
 		button.unbind('click').click(function(){
@@ -85,7 +85,10 @@ var profile={
 		});
 	},
 	send:function(row) {
-		v=row.find('input').hide().val();
+		i=row.find('input,select,textarea').hide();
+		if (i.is('select')) v=i.find('option:selected').text();
+		else v=i.val();
+		
 		row.find('span:eq(0)').show().text(v);
 		button=row.find('button');
 		button.unbind('click').click(function(){

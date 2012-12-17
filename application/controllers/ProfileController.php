@@ -12,10 +12,15 @@ class ProfileController extends Zend_Controller_Action
 
     public function init()
     {
+    	$this->user=Model_User::getInstance();
         $this->view->option=array(
-        		//'prova'=>array('name'=>'[PROVA]','value'=>'prova')
+        	//'prova'=>array(
+		//		'name'=>'[PROVA]',
+		//		'value'=>'prova',
+		//		'label'=>''//if null display value
+		//		'type'=>'Input'// default or Select or Textarea
+		//		'option'=>array())
         );
-        $this->user=Model_User::getInstance();
     }
 
     public function indexAction()
