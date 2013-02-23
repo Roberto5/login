@@ -1,0 +1,126 @@
+<?php
+/**
+ *
+ * @author pagliaccio
+ * @version 
+ */
+require_once 'Zend/View/Interface.php';
+/**
+ * MyMenu helper
+ *
+ * @uses viewHelper Zend_View_Helper
+ */
+class Zend_View_Helper_MyMenu extends Zend_View_Helper_Abstract
+{
+    /**
+     * @var Zend_View_Interface 
+     */
+    public $view;
+    /**
+     * 
+     * @var Array
+     */
+    public $page=array();
+    /**
+     * 
+     * @var Zend_Acl
+     */
+    private $acl;
+    private $iconPath='menu';
+    /**
+     * @param Array $config
+     * @return Zend_View_Helper_MyMenu 
+     */
+    public function myMenu($config=false)
+    {
+    	if (is_array($config)) {
+    		if ($config['page']) {
+    			$this->page=$config['page'];
+    		}
+    		if ($config['acl']) {
+    			$this->acl=$config['acl'];
+    		}
+    		else {
+    			$this->acl=Zend_Registry::get("acl");
+    		}
+    		if ($config['icon']) {
+    			$this->iconPath=$config['icon'];
+    		}
+    		if (!$config['page'] && !$config['acl'] && !$config['icon']) {
+    			$this->page=$config;
+    		}
+    	}
+    	else $this->acl=Zend_Registry::get("acl");
+    	return $this;
+    }
+    /**
+     * 
+     * @param string|array $label
+     * @param string $module
+     * @param string $controller
+     * @param string $action
+     * @param int $order
+     * @param string $resource
+     * @param string $privilege
+     * @return Zend_View_Helper_MyMenu
+     */
+    public function add($label,$module=NULL,$controller=NULL,$action=NULL,$order=NULL,$resource=NULL,$privilege=NULL,$icon=null,$iconSize=null,$text=null) {
+    	if (is_array($label)) $this->page[]=$label;
+    	else
+    		$this->page[]=array('label'=>$label
+				,'module'=>$module
+				,'controller' =>$controller
+				,'action'=>$action
+				,'order'=>$order
+				,'resource'=>$resource
+				,'privilege'=>$privilege
+    			,'icon'=>$icon
+    			,'iconSize'=>$iconSize
+    			,'text'=>$text
+			);
+    	return $this;
+    }
+    /**
+     * 
+     * @return string
+     */
+    public function render() {
+    	$menu=new Zend_Navigation($this->page);
+    	//$nav=new Zend_View_Helper_Navigation();
+    	try
+    	{
+    		$this->view->navigation($menu)
+    			->setAcl($this->acl)
+    			->setRole(Model_Role::getRole());
+    	}
+    	catch (Exception $e)
+    	{
+    		print_r($e);
+    		trigger_error($e->getMessage());
+    	}
+    	
+    	return $this->view->navigation()->render();
+    }
+    /**
+     * @return string
+     */
+    public function __toString() {
+    	try
+    	{
+    		$str = $this->render();
+    	}
+    	catch (Exception $e)
+    	{
+    		trigger_error($e->getMessage());
+    	}
+    	return $str;
+    }
+    /**
+     * Sets the view field 
+     * @param $view Zend_View_Interface
+     */
+    public function setView (Zend_View_Interface $view)
+    {
+        $this->view = $view;
+    }
+}

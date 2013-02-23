@@ -2,11 +2,9 @@
 
 class ErrorController extends Zend_Controller_Action
 {
-
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
-        
         if (!$errors || !$errors instanceof ArrayObject) {
         	$e=$this->_getParam('error',false);
             $this->view->message = $e ? $e : 'You have reached the error page';

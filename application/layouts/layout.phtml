@@ -26,8 +26,13 @@ echo $this->headScript()->prependFile($this->baseUrl('/common/js/js.php'));
 if ($this->t->getLocale()!='en') echo '<script tipe="text/javascript" src="'.$this->baseURL('/common/js/localization/messages_'.$this->t->getLocale().'.js').'"></script>';
 echo '<script tipe="text/javascript">
 <!--
-var path="'.$this->baseUrl().'";
-//-->
+var path="'.$this->baseUrl().'";';
+if ($this->logger) {
+	foreach ($this->logger as $log) {
+		echo 'console.log("'.$log['timestamp'].' - '.$log['priorityName'].' - '.($log['info']? $log[info].': ' : '').'",'.$log['message'].');';
+	}
+}
+echo '//-->
 </script>';
 $this->headTitle()->setSeparator(' - ');
 $this->headTitle($config->site);
@@ -61,21 +66,16 @@ if (!in_array($this->t->getLocale(), $this->t->getList()) || (Zend_Registry::get
 			</form>
 		</div>
 		<div id="container">
-		<?php 
-		if ($this->logger) {
-			$text="<ol>";
-			foreach ($this->logger as $value) {
-				$text.='<li class="priority'.$value['priority'].'"><b>'.$value['info'].'</b> : '.$value['timestamp'].' - '.$value['message'].' - '.$value['priorityName']."</li>";
-			}
-			$text.="</ol>";
-			echo $this->template()->spoiler($text,false,'log');
-		}
+		<?php
 		$page=array(
 			array('label'=>'Home'
 				,'module'=>'default'
 				,'controller' => 'index'
 				,'action'=>'index'
 				,'order'=>0
+				,'icon'=>'common/img/menu/index.png'
+				//,'iconSize'=>32
+				//,'text'=>false //display or not display a text?
 			)
 			,array('label'=>'Login'
 				,'module'=>'default'
@@ -115,11 +115,14 @@ if (!in_array($this->t->getLocale(), $this->t->getList()) || (Zend_Registry::get
 				,'order'=>100
 			)
 		);
-		$menu=new Zend_Navigation($page);
-		$acl = Zend_Registry::get("acl");
-		
-		$this->navigation($menu)->setAcl($acl)->setRole(Model_Role::getRole());
-		echo $this->navigation();//->menu();
+		/*echo $this->myMenu()->add(array('label'=>'yourpage'
+				,'module'=>'default'
+				,'controller' => 'yourpage'
+				,'action'=>'index'
+				,'order'=>0
+			))
+			->add($label,$module,$controller,$action,$order,$resource,$privilege);*/
+		echo $this->myMenu($page);
 		echo $this->layout()->content; ?>
 	</div>
 	<div id="footer">
