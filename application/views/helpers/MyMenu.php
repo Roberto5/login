@@ -26,7 +26,6 @@ class Zend_View_Helper_MyMenu extends Zend_View_Helper_Abstract
      * @var Zend_Acl
      */
     private $acl;
-    private $iconPath='menu';
     /**
      * @param Array $config
      * @return Zend_View_Helper_MyMenu 
@@ -43,10 +42,7 @@ class Zend_View_Helper_MyMenu extends Zend_View_Helper_Abstract
     		else {
     			$this->acl=Zend_Registry::get("acl");
     		}
-    		if ($config['icon']) {
-    			$this->iconPath=$config['icon'];
-    		}
-    		if (!$config['page'] && !$config['acl'] && !$config['icon']) {
+    		if (!$config['page'] && !$config['acl']) {
     			$this->page=$config;
     		}
     	}
@@ -66,11 +62,8 @@ class Zend_View_Helper_MyMenu extends Zend_View_Helper_Abstract
      */
     public function add($label,$module=NULL,$controller=NULL,$action=NULL,$order=NULL,$resource=NULL,$privilege=NULL,$icon=null,$iconSize=null,$text=null) {
     	if (is_array($label)) $this->page[]=$label;
-    	else
-    		$this->page[]=array('label'=>$label
-				,'module'=>$module
-				,'controller' =>$controller
-				,'action'=>$action
+    	else {
+    		$nav=array('label'=>$label
 				,'order'=>$order
 				,'resource'=>$resource
 				,'privilege'=>$privilege
@@ -78,6 +71,15 @@ class Zend_View_Helper_MyMenu extends Zend_View_Helper_Abstract
     			,'iconSize'=>$iconSize
     			,'text'=>$text
 			);
+    		if (!$controller && !$action) $nav['uri']=$module;
+    		else {
+    			$nav['module']=$module;
+    			$nav['controller']=$controller;
+    			$nav['action']=$action;
+    		}
+    		$this->page[]=$nav;
+    	}
+    		
     	return $this;
     }
     /**
@@ -86,7 +88,6 @@ class Zend_View_Helper_MyMenu extends Zend_View_Helper_Abstract
      */
     public function render() {
     	$menu=new Zend_Navigation($this->page);
-    	//$nav=new Zend_View_Helper_Navigation();
     	try
     	{
     		$this->view->navigation($menu)

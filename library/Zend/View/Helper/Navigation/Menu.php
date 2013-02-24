@@ -221,7 +221,8 @@ class Zend_View_Helper_Navigation_Menu
                 $title = $t->translate($title);
             }
         }
-
+        $text=!$page->__isset('text') ? true : $page->get('text');
+        if (!$text && !$title) $title=$label;
         // get attribs for element
         $attribs = array(
             'id'     => $page->getId(),
@@ -231,7 +232,7 @@ class Zend_View_Helper_Navigation_Menu
 		$icon=$page->get('icon');
 		$iconSize=$page->get('iconSize')?$page->get('iconSize'):'32';
 		
-		$text=$page->__isset('text') ? true : $page->get('text');
+		
         // does page have a href?
         if ($href = $page->getHref()) {
             $element = 'a';
@@ -240,11 +241,12 @@ class Zend_View_Helper_Navigation_Menu
         } else {
             $element = 'span';
         }
+        
 		$imgattr=$attribs;
 		$imgattr['href']=$imgattr['target']=null;
         return '<' . $element . $this->_htmlAttribs($attribs) . '>'
-        	.($icon? '<img src="'.$icon.'" alt="'.$label.'" height="'.$iconSize.'" width="'.$iconSize.'" '.$this->_htmlAttribs($attribs).' />':'')
-            . ($text ? '' : $this->view->escape($label))
+        	.($icon? '<img src="'.$icon.'" alt="'.$label.'" height="'.$iconSize.'" width="'.$iconSize.'" />':'')
+            . ($text ? $this->view->escape($label) : '')
             . '</' . $element . '>';
     }
 
