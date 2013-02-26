@@ -27,6 +27,7 @@ if ($this->t->getLocale()!='en') echo '<script tipe="text/javascript" src="'.$th
 echo '<script tipe="text/javascript">
 <!--
 var path="'.$this->baseUrl().'";';
+//******************************************logger*******************************************************
 if ($this->logger) {
 	foreach ($this->logger as $log) {
 		echo 'console.log("'.$log['timestamp'].' - '.$log['priorityName'].' - '.($log['info']? $log[info].': ' : '').'",'.$log['message'].');';
